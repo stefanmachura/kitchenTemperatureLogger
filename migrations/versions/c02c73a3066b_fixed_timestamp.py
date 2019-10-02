@@ -1,8 +1,8 @@
-"""added temperature
+"""fixed timestamp
 
-Revision ID: 2fba3ea8f00e
-Revises: 826d89d3711a
-Create Date: 2019-10-02 12:47:05.210629
+Revision ID: c02c73a3066b
+Revises: 
+Create Date: 2019-10-02 13:25:20.767910
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2fba3ea8f00e'
-down_revision = '826d89d3711a'
+revision = 'c02c73a3066b'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -22,7 +22,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('location', sa.String(length=128), nullable=True),
     sa.Column('tmp', sa.String(length=10), nullable=True),
-    sa.Column('datetime', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

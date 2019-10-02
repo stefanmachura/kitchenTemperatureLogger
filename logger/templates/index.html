@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Kitchen Temperature Logger</title>
 </head>
 <body>
-    <h1>Hello {{user.username}}</h1>
-    {% for t in data.temperatures %}
-        {{t.location}} - {{t.timestamp}} - <strong>{{t.tmp}}</strong><br/>
-    {% endfor %}
+        <div class="container">
+                <div class="row">
+                  <div class="col">
+                        <h1>Hello {{user.username}}</h1>
+                  </div>
+                </div>
+                {% for t in data.temperatures %}
+                <div class="row">
+                  <div class="col">
+                        {{t.location}}
+                  </div>
+                  <div class="col">
+                        {{t.timestamp}}
+                  </div>
+                  <div class="col">
+                        <strong>{{t.tmp}}</strong>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+body {
+    font-size: 1.3em;
+}
+
+.top {
+    height:30px;
+}
+
+.main {
+    min-width: 700px;
+    background-image: linear-gradient(to bottom right, #b4e612, #129fe6);
+    border-radius: 25px;
+    padding:2em;
+    padding-right: 1em;
+    width:100%;
+}
+
+.head {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.plot {
+    text-align: center
+}
+
+
+#current_tmp {
+    font-weight: bold;
+    font-size: 4em;
+}

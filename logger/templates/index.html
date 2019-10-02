@@ -2,30 +2,61 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kitchen Temperature Logger</title>
 </head>
 <body>
-        <div class="container">
-                <div class="row">
-                  <div class="col">
-                        <h1>Hello {{user.username}}</h1>
+      <div class="container top">
+      </div>
+      <div class="container-fluid">
+            <div class="row">
+                  <div class="col-xl-1"></div>
+                  <div class="col-xl-5 main">
+                              <div class="row">
+                                    <div class="col-sm-12">
+                                          <span id="current_tmp">{{data.temperatures.0.tmp}}°C</span>
+                                    </div>
+                              </div>
+                              <div class="row">
+                                    <div class="col-sm-2 head">
+                                          Place
+                                    </div>
+                                    <div class="col-sm-6 head">
+                                          Date and Time
+                                    </div>
+                                    <div class="col-sm-3 head">
+                                          Temperature
+                                    </div>
+                              </div>
+                              {% for t in data.temperatures %}
+                              <div class="row">
+                                    <div class="col-sm-2">
+                                          {{t.location|title}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                          {{t.timestamp.strftime('%Y-%m-%d %H:%M')}}
+                                    </div>
+                                    <div class="col-sm-3">
+                                          <strong>{{t.tmp}}°C</strong>
+                                    </div>
+                              </div>
+                              {% endfor %}
                   </div>
-                </div>
-                {% for t in data.temperatures %}
-                <div class="row">
-                  <div class="col">
-                        {{t.location}}
+                  <div class="col-xl-1"></div>
+                  <div class="col-xl-4 main">
+                              <div class="row">
+                                    <div class="col-lg-12 plot">
+                                          <img src="{{ url_for('static', filename='plot.png') }}" alt="">
+                                    </div>
+                              </div>  
                   </div>
-                  <div class="col">
-                        {{t.timestamp}}
-                  </div>
-                  <div class="col">
-                        <strong>{{t.tmp}}</strong>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>    
+                  <div class="col-xl-1"></div>
+            </div>
+      </div> 
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

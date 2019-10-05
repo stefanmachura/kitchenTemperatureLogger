@@ -9,7 +9,7 @@ def get_temperature():
         print(temperature)
         conn = sqlite3.connect('app.db')
         c = conn.cursor()
-        c.execute("INSERT INTO temperature (location, tmp) VALUES ('kitchen', ?)", temperature)
+        c.execute("INSERT INTO temperature (location, tmp) VALUES ('kitchen', ?)", (str(temperature)),
         conn.commit()
     except Exception as err:
         print(err)

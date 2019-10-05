@@ -5,15 +5,16 @@ from matplotlib.dates import DateFormatter
 import os
 
 from datetime import datetime
+import sys
 
 
 conn = sqlite3.connect('app.db')
 c = conn.cursor()
 
-sql = 'SELECT * FROM temperature ORDER BY timestamp DESC LIMIT 20'
+how_many = 60 if len(sys.argv) == 1 else sys.argv[1]
 data = []
 time = []
-for row in c.execute(sql):
+for row in c.execute('SELECT * FROM temperature ORDER BY timestamp DESC LIMIT ?', (how_many, )):
     data.append(float(row[2]))
     tm = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S.%f")
     time.append(tm)

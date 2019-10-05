@@ -6,32 +6,35 @@ import os
 
 from datetime import datetime
 import sys
+import timeit
+
+def generate_graph_from_db():
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+
+    how_many = 60 if len(sys.argv) == 1 else sys.argv[1]
+    data = []
+    time = []
+    for row in c.execute('SELECT * FROM temperature ORDER BY timestamp DESC LIMIT ?', (how_many, )):
+        data.append(float(row[2]))
+        tm = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S.%f")
+        time.append(tm)
+
+    print(data)
+
+    fig, ax = plt.subplots()
+    ax.plot(time, data)
+
+    myFmt = DateFormatter("%H:%M")
+    ax.xaxis.set_major_formatter(myFmt)
 
 
-conn = sqlite3.connect('app.db')
-c = conn.cursor()
+    fig.autofmt_xdate()
 
-how_many = 60 if len(sys.argv) == 1 else sys.argv[1]
-data = []
-time = []
-for row in c.execute('SELECT * FROM temperature ORDER BY timestamp DESC LIMIT ?', (how_many, )):
-    data.append(float(row[2]))
-    tm = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S.%f")
-    time.append(tm)
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    fname = os.path.join(basedir, 'logger', 'static', 'plot.png')
+    plt.savefig(fname)
 
-print(data)
+    conn.close()
 
-fig, ax = plt.subplots()
-ax.plot(time, data)
-
-myFmt = DateFormatter("%H:%M")
-ax.xaxis.set_major_formatter(myFmt)
-
-
-fig.autofmt_xdate()
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-fname = os.path.join(basedir, 'logger', 'static', 'plot.png')
-plt.savefig(fname)
-
-conn.close()
+print(timeit.timeit(generate_graph_from_db, number=1))

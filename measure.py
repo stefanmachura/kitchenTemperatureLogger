@@ -15,3 +15,5 @@ def get_temperature():
         print(err)
     finally:
         conn.close()
+
+get_temperature()

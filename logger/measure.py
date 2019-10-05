@@ -1,6 +1,6 @@
 import w1thermsensor
 
-from logger import app, db
+from logger import db
 from logger.models import Temperature
 from sqlalchemy import desc
 

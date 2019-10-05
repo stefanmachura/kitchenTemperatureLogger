@@ -33,6 +33,4 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 fname = os.path.join(basedir, 'logger', 'static', 'plot.png')
 plt.savefig(fname)
 
-plt.show()
-
 conn.close()

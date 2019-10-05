@@ -1,18 +1,16 @@
 import w1thermsensor
 
-from logger import db
-from logger.models import Temperature
-from sqlalchemy import desc
+import sqlite3
 
 def get_temperature():
     sensor = w1thermsensor.W1ThermSensor()
     temperature = sensor.get_temperature()
     try:
         print(temperature)
-        x = Temperature(location='kitchen', tmp=temperature)
-        db.session.add(x)
-        db.session.commit()
+        conn = sqlite3.connect('app.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO temperature (location, tmp) VALUES ('kitchen', ?)", temperature)
     except:
         pass
     finally:
-        pass
+        conn.close()

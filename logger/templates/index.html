@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <title>Kitchen Temperature Logger</title>
 </head>
 <body>
@@ -48,15 +49,24 @@
                   <div class="col-xl-4 main">
                               <div class="row">
                                     <div class="col-lg-12 plot">
-                                          <img src="{{ url_for('static', filename='plot.png') }}" alt="">
+                                                <script>
+                                                      let hours = "{{ url_for('static', filename='1day.png') }}";    
+                                                      let day = "{{ url_for('static', filename='3days.png') }}";    
+                                                      let week = "{{ url_for('static', filename='10days.png') }}";    
+                                                </script>
+                                                <a href="#" onclick="change(hours)">Last day</a> |
+                                                <a href="#" onclick="change(day)">Last 3 days</a> |
+                                                <a href="#" onclick="change(week)">Last 10 days</a>
+                                                <br/><br/>
+                                          <img src="{{ url_for('static', filename='1day.png') }}" id="plot">
                                     </div>
                               </div>  
                   </div>
                   <div class="col-xl-1"></div>
             </div>
       </div> 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="{{ url_for('static', filename='images.js') }}"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
